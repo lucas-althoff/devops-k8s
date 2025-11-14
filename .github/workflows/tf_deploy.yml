@@ -17,7 +17,7 @@ jobs:
               uses: hashicorp/setup-terraform@v3
 
             - name: Terraform init
-              run: terraform init -backend-config="conn_str=${{ secrets.STATE_DB_CONN_STR }}" -reconfigure
+              run: terraform init -backend-config="conn_str=${{ secrets.STATE_DB_CONN_STR }}" --reconfigure
 
             - name: Terraform apply
               working-directory: ./iac
