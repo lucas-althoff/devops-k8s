@@ -221,3 +221,6 @@ __marimo__/
 kubeconfig
 
 *.Identifier
+iac/terraform.tfvars
+mcp_server_config_claude.json
+/iac/.terraform/*
