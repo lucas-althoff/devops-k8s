@@ -1,15 +1,14 @@
 name: Terraform deploy
+
 on:
     push:
-        branches:
-            - main
-
+        branches: [ "homolog" ]
 
 jobs:
     terraform:
         runs-on: ubuntu-latest
         env:
-          TF_VAR_do_token:${{secretc.DIGITAL_OCEAN_TOKEN}}
+          TF_VAR_do_token:${{ secrets.DIGITAL_OCEAN_TOKEN }}
         steps:
             - name: Checkout
               uses: actions/checkout@v5
@@ -18,7 +17,7 @@ jobs:
               uses: hashicorp/setup-terraform@v3
 
             - name: Terraform init
-              uses: terraform init -backend-config="conn_str=${{secrets.STATE_DB_CONN_STR}}"
+              uses: terraform init -backend-config="conn_str=${{ secrets.STATE_DB_CONN_STR }}"
 
             - name: Terraform apply
               working-directory: .iac/
