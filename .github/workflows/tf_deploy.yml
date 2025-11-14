@@ -20,5 +20,5 @@ jobs:
               run: terraform init -backend-config="conn_str=${{ secrets.STATE_DB_CONN_STR }}"
 
             - name: Terraform apply
-              working-directory: .iac/
+              working-directory: ./iac
               run: terraform apply --auto-approve
