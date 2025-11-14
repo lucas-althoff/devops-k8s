@@ -1,0 +1,24 @@
+name: Terraform Destroy
+
+on:
+    workflow_dispatch:
+
+jobs:
+    terraform-destroy:
+        runs-on: ubuntu-latest
+        env:
+          TF_VAR_do_token: ${{ secrets.DIGITAL_OCEAN_TOKEN }}
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v5
+            
+            - name: Setup Terraform
+              uses: hashicorp/setup-terraform@v3
+
+            - name: Terraform init
+              working-directory: ./iac
+              run: terraform init -backend-config="conn_str=${{ secrets.STATE_DB_CONN_STR }}" -reconfigure
+
+            - name: Terraform destroy
+              working-directory: ./iac
+              run: terraform destroy --auto-approve
